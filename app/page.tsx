@@ -52,6 +52,15 @@ const SERVICES = [
   },
 ];
 
+const HERO_COLLAGE = [
+  { src: "/photos/hero-toro-recycler.jpg", alt: "Toro Recycler push mower on the showroom floor" },
+  { src: "/photos/hero-stihl-hedge.jpg", alt: "Stihl hedge trimmer in action — Shaped by Innovation" },
+  { src: "/photos/hero-mower-wheel.jpg", alt: "Toro Recycler mower wheel detail" },
+  { src: "/photos/hero-service-hands.jpg", alt: "Service technician working on a Toro mower deck" },
+  { src: "/photos/hero-stihl-trimmer.jpg", alt: "Stihl string trimmer — Performance you can see" },
+  { src: "/photos/hero-toro-60v.jpg", alt: "Toro 60V battery-powered push mower" },
+];
+
 const SHOP_FEED = [
   {
     src: "/photos/toro-zeroturn.png",
@@ -148,69 +157,99 @@ export default function Page() {
 
       {/* ─────────────────────────── HERO ─────────────────────────── */}
       <section id="top" className="relative bg-navy text-bone overflow-hidden">
-        <div className="absolute inset-0">
-          <div
-            className="absolute inset-0 bg-cover bg-center ken-burns"
-            style={{
-              backgroundImage:
-                "url('https://images.unsplash.com/photo-1599050751795-6cdaafbc2319?auto=format&fit=crop&w=2200&q=80')",
-            }}
-          />
-          <div
-            className="absolute inset-0"
-            style={{
-              background:
-                "linear-gradient(110deg, rgba(15,26,46,0.92) 0%, rgba(15,26,46,0.72) 45%, rgba(15,26,46,0.45) 100%)",
-            }}
-          />
-        </div>
+        {/* subtle navy texture base — no full-bleed image */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background:
+              "radial-gradient(ellipse at 20% 0%, rgba(36,54,99,0.55) 0%, rgba(15,26,46,0) 60%), radial-gradient(ellipse at 90% 100%, rgba(209,74,44,0.18) 0%, rgba(15,26,46,0) 55%)",
+          }}
+        />
 
-        <div className="relative mx-auto max-w-[1320px] px-6 lg:px-10 pt-24 pb-28 lg:pt-36 lg:pb-44">
-          <div className="anim-fade" style={{ ["--anim-delay" as any]: "0ms" }}>
-            <div className="flex items-center gap-4">
-              <span className="block h-px w-10 bg-ember" />
-              <span className="eyebrow text-ember">
-                Authorized Dealer · Spring Hill, FL
-              </span>
+        <div className="relative mx-auto max-w-[1320px] px-6 lg:px-10 pt-20 pb-20 lg:pt-28 lg:pb-28">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+            {/* ── Left: text column ── */}
+            <div className="lg:col-span-7">
+              <div className="anim-fade" style={{ ["--anim-delay" as any]: "0ms" }}>
+                <div className="flex items-center gap-4">
+                  <span className="block h-px w-10 bg-ember" />
+                  <span className="eyebrow text-ember">
+                    Authorized Dealer · Spring Hill, FL
+                  </span>
+                </div>
+              </div>
+
+              <h1
+                className="anim-settle mt-7 font-display font-black uppercase text-bone leading-[0.92] tracking-tight text-[clamp(2.6rem,7.2vw,6.4rem)]"
+                style={{ ["--anim-delay" as any]: "100ms" }}
+              >
+                Serious equipment.
+                <br />
+                <span className="text-ember">Expertly serviced.</span>
+              </h1>
+
+              <p
+                className="anim-settle mt-7 max-w-2xl font-sans text-[1.02rem] lg:text-[1.12rem] text-bone/85 leading-relaxed"
+                style={{ ["--anim-delay" as any]: "260ms" }}
+              >
+                Spring Hill Outdoor Power Equipment is the authorized{" "}
+                <span className="text-bone font-semibold">Spartan</span>,{" "}
+                <span className="text-bone font-semibold">Toro</span>, and{" "}
+                <span className="text-bone font-semibold">Exmark</span> dealer
+                for Hernando County. Sales, service, and parts — for homeowners
+                and the crews that work the property next door.
+              </p>
+
+              <div
+                className="anim-settle mt-10 flex flex-wrap items-center gap-4"
+                style={{ ["--anim-delay" as any]: "420ms" }}
+              >
+                <a href={PHONE_HREF} className="btn-ember">
+                  <span>Call {PHONE}</span>
+                  <span aria-hidden>→</span>
+                </a>
+                <a href="#equipment" className="btn-ghost-light">
+                  Browse Equipment
+                </a>
+              </div>
+            </div>
+
+            {/* ── Right: photo collage ── */}
+            <div
+              className="lg:col-span-5 anim-fade"
+              style={{ ["--anim-delay" as any]: "200ms" }}
+            >
+              <div className="grid grid-cols-2 gap-3 lg:gap-4">
+                {HERO_COLLAGE.map((p, i) => (
+                  <div
+                    key={p.src}
+                    className="relative aspect-square overflow-hidden bg-navy-800 group"
+                  >
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={p.src}
+                      alt={p.alt}
+                      width={206}
+                      height={206}
+                      loading={i < 2 ? "eager" : "lazy"}
+                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1200ms] group-hover:scale-[1.04]"
+                    />
+                    {/* faint hairline border */}
+                    <div className="absolute inset-0 ring-1 ring-bone/10 pointer-events-none" />
+                  </div>
+                ))}
+              </div>
+              <div className="mt-3 flex items-center justify-between text-bone/45 text-[0.7rem] uppercase tracking-[0.22em] font-semibold">
+                <span>From the shop floor</span>
+                <span aria-hidden className="text-ember">·</span>
+                <span>Spring Hill, FL</span>
+              </div>
             </div>
           </div>
 
-          <h1
-            className="anim-settle mt-8 font-display font-black uppercase text-bone leading-[0.92] tracking-tight text-[clamp(3rem,9vw,8.5rem)]"
-            style={{ ["--anim-delay" as any]: "100ms" }}
-          >
-            Serious equipment.
-            <br />
-            <span className="text-ember">Expertly serviced.</span>
-          </h1>
-
-          <p
-            className="anim-settle mt-8 max-w-2xl font-sans text-[1.05rem] lg:text-[1.18rem] text-bone/85 leading-relaxed"
-            style={{ ["--anim-delay" as any]: "260ms" }}
-          >
-            Spring Hill Outdoor Power Equipment is the authorized{" "}
-            <span className="text-bone font-semibold">Spartan</span>,{" "}
-            <span className="text-bone font-semibold">Toro</span>, and{" "}
-            <span className="text-bone font-semibold">Exmark</span> dealer for
-            Hernando County. Sales, service, and parts — for homeowners and the
-            crews that work the property next door.
-          </p>
-
+          {/* ── Stat strip ── */}
           <div
-            className="anim-settle mt-12 flex flex-wrap items-center gap-4"
-            style={{ ["--anim-delay" as any]: "420ms" }}
-          >
-            <a href={PHONE_HREF} className="btn-ember">
-              <span>Call {PHONE}</span>
-              <span aria-hidden>→</span>
-            </a>
-            <a href="#equipment" className="btn-ghost-light">
-              Browse Equipment
-            </a>
-          </div>
-
-          <div
-            className="anim-fade mt-20 lg:mt-28 grid grid-cols-2 md:grid-cols-4 gap-y-8 gap-x-6 border-t border-bone/15 pt-10"
+            className="anim-fade mt-16 lg:mt-24 grid grid-cols-2 md:grid-cols-4 gap-y-8 gap-x-6 border-t border-bone/15 pt-10"
             style={{ ["--anim-delay" as any]: "640ms" }}
           >
             <Stat n="6" sub="Years serving Spring Hill" />
