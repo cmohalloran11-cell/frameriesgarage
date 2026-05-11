@@ -52,6 +52,29 @@ const SERVICES = [
   },
 ];
 
+const SHOP_FEED = [
+  {
+    src: "/photos/toro-zeroturn.png",
+    alt: "Toro zero-turn mower in action",
+    caption: "Toro · Zero-Turn",
+  },
+  {
+    src: "/photos/toro-push.png",
+    alt: "Toro residential push mower",
+    caption: "Toro · Walk-Behind",
+  },
+  {
+    src: "/photos/stihl-chainsaw.png",
+    alt: "Stihl chainsaw on a wheelbarrow",
+    caption: "Stihl · Chainsaws",
+  },
+  {
+    src: "/photos/rehlko-oil.png",
+    alt: "Rehlko engine oil bottles",
+    caption: "Rehlko · Engine Oil",
+  },
+];
+
 const QUOTES = [
   {
     body: "Staff is genuinely professional and knows the equipment inside out.",
@@ -346,6 +369,70 @@ export default function Page() {
               </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* ─────────────────────────── FROM THE SHOP ─────────────────────────── */}
+      <section className="bg-bone py-24 lg:py-28 border-t border-navy/10">
+        <div className="mx-auto max-w-[1320px] px-6 lg:px-10">
+          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 mb-12" data-reveal>
+            <div className="max-w-2xl">
+              <div className="flex items-center gap-4 mb-6">
+                <span className="block h-px w-10 bg-ember" />
+                <span className="eyebrow">From the Shop</span>
+              </div>
+              <h2 className="font-display font-black uppercase text-navy text-[clamp(2.2rem,5vw,4rem)] leading-[0.94]">
+                What's on the floor.
+              </h2>
+            </div>
+            <p className="text-navy/60 max-w-md text-[0.98rem] leading-relaxed lg:text-right">
+              Recent posts from our shop — equipment we stock, work on, and stand behind.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
+            {SHOP_FEED.map((item, i) => (
+              <figure
+                key={item.src}
+                className="group relative bg-navy overflow-hidden tile-lift aspect-square"
+                data-reveal
+                style={{ ["--reveal-delay" as any]: `${i * 100}ms` }}
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={item.src}
+                  alt={item.alt}
+                  width={206}
+                  height={206}
+                  loading="lazy"
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-navy/90 to-transparent pointer-events-none" />
+                <figcaption className="absolute bottom-0 left-0 right-0 p-4 flex items-center justify-between text-bone">
+                  <span className="font-display font-bold uppercase text-bone text-[0.92rem] tracking-tight">
+                    {item.caption}
+                  </span>
+                  <span className="eyebrow-quiet text-bone/55 text-[0.58rem]">
+                    SHOPE
+                  </span>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+
+          <p className="mt-10 text-sm text-navy/55 flex flex-wrap items-center gap-2" data-reveal>
+            More on{" "}
+            <a
+              href="https://www.facebook.com/springhilloutdoorpe"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-ember underline-offset-4 hover:underline font-semibold inline-flex items-center gap-1"
+            >
+              Facebook
+              <span aria-hidden>↗</span>
+            </a>
+            — follow for new arrivals, service tips, and shop updates.
+          </p>
         </div>
       </section>
 
