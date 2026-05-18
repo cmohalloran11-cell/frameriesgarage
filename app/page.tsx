@@ -220,24 +220,34 @@ export default function Page() {
               style={{ ["--anim-delay" as any]: "200ms" }}
             >
               <div className="grid grid-cols-2 gap-3 lg:gap-4">
-                {HERO_COLLAGE.map((p, i) => (
-                  <div
-                    key={p.src}
-                    className="relative overflow-hidden bg-navy-800 group"
-                  >
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={p.src}
-                      alt={p.alt}
-                      width={206}
-                      height={206}
-                      loading={i < 2 ? "eager" : "lazy"}
-                      className="block w-full h-auto transition-transform duration-[1200ms] group-hover:scale-[1.04]"
-                    />
-                    {/* faint hairline border */}
-                    <div className="absolute inset-0 ring-1 ring-bone/10 pointer-events-none" />
-                  </div>
-                ))}
+                {HERO_COLLAGE.map((p, i) => {
+                  // Tile 5 (Stihl trimmer "PERFORMANCE YOU CAN SEE"): zoom into
+                  // the top portion so "YOU CAN SEE" clips out of view, leaving
+                  // just "PERFORMANCE" at the bottom of the visible frame.
+                  const isStihlTrimmer = p.src.includes("stihl-trimmer");
+                  return (
+                    <div
+                      key={p.src}
+                      className="relative aspect-square overflow-hidden bg-navy-800 group"
+                    >
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={p.src}
+                        alt={p.alt}
+                        width={206}
+                        height={206}
+                        loading={i < 2 ? "eager" : "lazy"}
+                        className={`absolute inset-0 w-full h-full object-cover transition-transform duration-[1200ms] group-hover:scale-[1.04] ${
+                          isStihlTrimmer
+                            ? "object-top scale-[1.22] origin-top"
+                            : "object-center"
+                        }`}
+                      />
+                      {/* faint hairline border */}
+                      <div className="absolute inset-0 ring-1 ring-bone/10 pointer-events-none" />
+                    </div>
+                  );
+                })}
               </div>
               <div className="mt-3 flex items-center justify-between text-bone/45 text-[0.7rem] uppercase tracking-[0.22em] font-semibold">
                 <span>From the shop floor</span>
